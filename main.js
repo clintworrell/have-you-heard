@@ -1,5 +1,6 @@
 const API_BASE_URL = 'https://api.spotify.com';
 const API_VERSION = 'v1';
+var audio;
 
 $("#search-button").click(function() {
   var artistName = $("#search-box").val();
@@ -97,31 +98,75 @@ function getArtistTopTracks(artistData) {
         //   "width": 200,
         //   "height": 200
         // });
-        $(this).addClass("track-playing");
-        $(this).children("i").removeClass("fa-play-circle");
-        $(this).children("i").addClass("fa-stop-circle");
-        $(this).children("i").addClass("fa-circle-playing");
-        $("body").css("margin-bottom", "30px");
-        $("#player").css("display", "flex");
-        // $("#player").css("float", "left");
-        $("#player-title").text(`${track.trackName}`);
-        $("#player-artist").text(`${track.artistName}`);
-        $("#player-img").css("background-image", `url(${this.artistImageUrl})`);
+        if(audio === undefined || audio.paused) {
+          $(this).addClass("track-playing");
+          $(this).children("i").removeClass("fa-play-circle");
+          $(this).children("i").addClass("fa-stop-circle");
+          // $(this).children("i").addClass("fa-circle-playing");
+          $("body").css("margin-bottom", "30px");
+          $("#player").css("display", "flex");
+          // $("#player").css("float", "left");
+          $("#player-title").text(`${track.trackName}`);
+          $("#player-artist").text(`${track.artistName}`);
+          $("#player-img").css("background-image", `url(${this.artistImageUrl})`);
 
 
-        $("#now-playing-img").css("background-image", `url(${this.artistImageUrl})`);
-        var audio = new Audio(this.trackPreviewUrl);
-        audio.play();
-        audio.addEventListener("ended", function() {
+          $("#now-playing-img").css("background-image", `url(${this.artistImageUrl})`);
+          audio = new Audio(this.trackPreviewUrl);
+          audio.play();
+          audio.addEventListener("ended", function() {
+            var stoppedTrack = $(".fa-stop-circle");
+            stoppedTrack.removeClass("fa-stop-circle");
+            stoppedTrack.addClass("fa-play-circle");
+            // stoppedTrack.removeClass("fa-circle-playing");
+
+            var finishedTrack = $(".track-playing");
+            finishedTrack.removeClass("track-playing");
+            autoplay(finishedTrack);
+          })
+        }
+        else if(audio.src === this.trackPreviewUrl) {
+          audio.pause();
           var stoppedTrack = $(".fa-stop-circle");
           stoppedTrack.removeClass("fa-stop-circle");
           stoppedTrack.addClass("fa-play-circle");
-          stoppedTrack.removeClass("fa-circle-playing");
+          // stoppedTrack.removeClass("fa-circle-playing");
 
           var finishedTrack = $(".track-playing");
           finishedTrack.removeClass("track-playing");
-          autoplay(finishedTrack);
-        })
+        }
+        else {
+          var trackPlaying = $(".track-playing");
+          trackPlaying.removeClass("track-playing");
+          trackPlaying.children("i").removeClass("fa-stop-circle");
+          trackPlaying.children("i").addClass("fa-play-circle");
+          // trackPlaying.removeClass("fa-circle-playing");
+
+          audio.pause();
+          audio = new Audio(this.trackPreviewUrl);
+          audio.play();
+
+          $(this).addClass("track-playing");
+          $(this).children("i").removeClass("fa-play-circle");
+          $(this).children("i").addClass("fa-stop-circle");
+          // $(this).children("i").addClass("fa-circle-playing");
+          $("body").css("margin-bottom", "30px");
+          $("#player").css("display", "flex");
+          // $("#player").css("float", "left");
+          $("#player-title").text(`${track.trackName}`);
+          $("#player-artist").text(`${track.artistName}`);
+          $("#player-img").css("background-image", `url(${this.artistImageUrl})`);
+          audio.addEventListener("ended", function() {
+            var stoppedTrack = $(".fa-stop-circle");
+            stoppedTrack.removeClass("fa-stop-circle");
+            stoppedTrack.addClass("fa-play-circle");
+            // stoppedTrack.removeClass("fa-circle-playing");
+
+            var finishedTrack = $(".track-playing");
+            finishedTrack.removeClass("track-playing");
+            autoplay(finishedTrack);
+          })
+        }
       });
       // $("#tracks").append(artistImage);
       $("#tracks").append(playlistTrack);
@@ -134,13 +179,13 @@ function autoplay(finishedTrack) {
   $(nextTrack).addClass("track-playing");
   $(nextTrack).children("i").removeClass("fa-play-circle");
   $(nextTrack).children("i").addClass("fa-stop-circle");
-  $(nextTrack).children("i").addClass("fa-circle-playing");
+  // $(nextTrack).children("i").addClass("fa-circle-playing");
 
   $("#player-title").text(`${nextTrack.trackName}`);
   $("#player-artist").text(`${nextTrack.artistName}`);
   $("#player-img").css("background-image", `url(${nextTrack.artistImageUrl})`);
 
-  var audio = new Audio(nextTrack.trackPreviewUrl);
+  audio = new Audio(nextTrack.trackPreviewUrl);
   audio.play();
   audio.addEventListener("ended", function() {
     var stoppedTrack = $(".fa-stop-circle");
