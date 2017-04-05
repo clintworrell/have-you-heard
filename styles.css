@@ -78,6 +78,7 @@ body {
   text-overflow: ellipsis;
   width: 100%;
   padding-top: 2px;
+  cursor: pointer;
   /*margin-right: 50px;*/
   /*display: flex;
   flex-direction: column;
@@ -300,7 +301,11 @@ body {
   background-color: #6B6C77;
 }
 
-.fa-circle-playing {
+/*.fa-circle-playing {
+  color: #F2A374;
+}*/
+
+.fa-stop-circle {
   color: #F2A374;
 }
 
@@ -350,11 +355,16 @@ body {
   }
 
   #player-controls {
+    font-size: 20px;
     width: 200px;
   }
 
   #player-img {
     margin-left: 80px;
     margin-right: 80px;
+  }
+
+  #player-song-info {
+    font-size: 16px;
   }
 }
