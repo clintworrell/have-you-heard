@@ -84,56 +84,18 @@ function getArtistTopTracks(artistData) {
     });
 
     var allTrackNames = topTracks.map(function(track) {
-      // var artistImage = $(`<div class='artist-image' style='background-image:url(${artistImageUrl})'></div>`);
-      // var playlistTrack = $(`<div class="track">${track.artistName} - ${track.trackName}</div>`);
-      // var playlistTrack = $(`<i class="fa fa-play-circle fa-2x"></i> <div class="track">${track.artistName} - ${track.trackName}</div>`);
-      // var playlistTrack = $(`<div class="track"><i class="fa fa-play-circle fa-2x"></i>${track.artistName} - ${track.trackName}</div>`);
-      var playlistTrack = $(`<div class="track"><i class="fa fa-play-circle fa-2x"></i><div class="track-song-info"><div class="track-song-artist">${track.artistName}</div><div class="track-song-title">${track.trackName}</div></div></div>`);
-      playlistTrack[0].artistName = track.artistName;
-      playlistTrack[0].trackName = track.trackName;
-      playlistTrack[0].trackPreviewUrl = track.previewUrl;
-      playlistTrack[0].artistImageUrl = artistImageUrl;
-      playlistTrack.click(function() {
-        // $("#now-playing-img").css({
-        //   "width": 200,
-        //   "height": 200
-        // });
+      var trackDiv = $(`<div class="track"><i class="fa fa-play-circle fa-2x"></i><div class="track-song-info"><div class="track-song-artist">${track.artistName}</div><div class="track-song-title">${track.trackName}</div></div></div>`);
+      trackDiv[0].artistName = track.artistName;
+      trackDiv[0].trackName = track.trackName;
+      trackDiv[0].trackPreviewUrl = track.previewUrl;
+      trackDiv[0].artistImageUrl = artistImageUrl;
+      trackDiv.click(function() {
+        // audio will be undefined if never started
         if(audio === undefined || audio.paused) {
-          $(this).addClass("track-playing");
-          $(this).children("i").removeClass("fa-play-circle");
-          $(this).children("i").addClass("fa-stop-circle");
-          // $(this).children("i").addClass("fa-circle-playing");
-          $("body").css("margin-bottom", "30px");
-          $("#player").css("display", "flex");
-          // $("#player").css("float", "left");
-          $("#player-title").text(`${track.trackName}`);
-          $("#player-artist").text(`${track.artistName}`);
-          $("#player-img").css("background-image", `url(${this.artistImageUrl})`);
-
-
-          $("#now-playing-img").css("background-image", `url(${this.artistImageUrl})`);
-          audio = new Audio(this.trackPreviewUrl);
-          audio.play();
-          audio.addEventListener("ended", function() {
-            var stoppedTrack = $(".fa-stop-circle");
-            stoppedTrack.removeClass("fa-stop-circle");
-            stoppedTrack.addClass("fa-play-circle");
-            // stoppedTrack.removeClass("fa-circle-playing");
-
-            var finishedTrack = $(".track-playing");
-            finishedTrack.removeClass("track-playing");
-            autoplay(finishedTrack);
-          })
-        }
-        else if(audio.src === this.trackPreviewUrl) {
-          audio.pause();
-          var stoppedTrack = $(".fa-stop-circle");
-          stoppedTrack.removeClass("fa-stop-circle");
-          stoppedTrack.addClass("fa-play-circle");
-          // stoppedTrack.removeClass("fa-circle-playing");
-
-          var finishedTrack = $(".track-playing");
-          finishedTrack.removeClass("track-playing");
+          startPlayback(trackDiv[0]);
+          // autoplay(finishedTrack);
+        } else if(audio.src === this.trackPreviewUrl) {
+          stopPlayback();
         }
         else {
           var trackPlaying = $(".track-playing");
@@ -169,7 +131,7 @@ function getArtistTopTracks(artistData) {
         }
       });
       // $("#tracks").append(artistImage);
-      $("#tracks").append(playlistTrack);
+      $("#tracks").append(trackDiv);
     });
   });
 }
@@ -197,4 +159,38 @@ function autoplay(finishedTrack) {
     finishedTrack.removeClass("track-playing");
     autoplay(finishedTrack);
   })
+}
+
+function stopPlayback() {
+  audio.pause();
+  trackEndedStyles();
+}
+
+function startPlayback(track) {
+  audio = new Audio(track.trackPreviewUrl);
+  audio.play();
+  audio.addEventListener("ended", function() {
+    trackEndedStyles();
+  });
+  trackStartedStyles(track);
+}
+
+function trackStartedStyles(track) {
+  $(track).addClass("track-playing");
+  $(track).children("i").removeClass("fa-play-circle");
+  $(track).children("i").addClass("fa-stop-circle");
+  $("body").css("margin-bottom", "30px");
+  $("#player").css("display", "flex");
+  $("#player-title").text(`${track.trackName}`);
+  $("#player-artist").text(`${track.artistName}`);
+  $("#player-img").css("background-image", `url(${track.artistImageUrl})`);
+}
+
+function trackEndedStyles() {
+  var track = $(".track-playing");
+  var trackControls = track.children("i");
+
+  track.removeClass("track-playing");
+  trackControls.removeClass("fa-stop-circle");
+  trackControls.addClass("fa-play-circle");
 }
