@@ -13,7 +13,10 @@ $("#search-button").click(function() {
 function changeStylesAfterSearch() {
   $("#heading").addClass("heading-after-search");
   $("#title").addClass("title-after-search");
-  $("#title").append($("<div id='search-icon' class='fa fa-search'></div>"));
+  $("#heading").append($("<div id='search-again-container'></div>"));
+  $("#search-again-container").append($("<input id='search-again' placeholder='Search again...' type='text'>"));
+  $("#search-again").addClass("search-again");
+  $("#search-again-container").append($("<button id='search-again-button' type='button'>Search</button>"));
   $("#subtitle").remove();
   $("#search").children().remove();
   $("#search").addClass("search-after-search");
@@ -102,7 +105,6 @@ function getArtistTopTracks(artistData) {
           startPlayback(trackDiv[0]);
         }
       });
-      // $("#tracks").append(artistImage);
       $("#tracks").append(trackDiv);
     });
   });
@@ -118,7 +120,7 @@ function startPlayback(track) {
   audio.play();
   audio.addEventListener("ended", function() {
     trackEndedStyles();
-    if(autoplay) { console.log("Autoplay on; playNextTrack() being called"); playNextTrack(track) }
+    if(autoplay) { playNextTrack(track); }
   });
   trackStartedStyles(track);
 }
