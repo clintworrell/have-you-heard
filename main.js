@@ -32,7 +32,7 @@ function changeStylesAfterSearch() {
 }
 
 function searchAgain() {
-  audio.pause();
+  if(audio) { audio.pause(); }
   $("#player").css("display", "none");
   $("#tracks").children().remove();
   $('html,body').scrollTop(0);
