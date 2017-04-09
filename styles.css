@@ -27,9 +27,6 @@ body {
   justify-content: center;
   align-items: center;
   width: 50px;
-  /*float: left;
-  margin-left: 15px;
-  margin-top: 15px;*/
 }
 
 .fa-stop-circle {
@@ -39,38 +36,23 @@ body {
   justify-content: center;
   align-items: center;
   width: 50px;
-  /*float: left;
-  margin-left: 15px;
-  margin-top: 15px;*/
 }
 
 .track {
-  /*background-color: #A57491;*/
-  /*background-color: #00C7CD;*/
   background-color: #282930;
   height: 50px;
-  /*border: 1px 0 0 0;*/
   border-style: solid;
   border-width: 1px 0 0 0;
-  /*border-color: #4B4D60;*/
-  /*border-color: #A574A5;*/
-  /*border-color: #a985a9;*/
-  /*border-color: #FFD68C;*/
   border-color: #353535;
   color: #F7F7F7;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
-  /*padding-right: 47px;*/
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   display: flex;
   text-align: center;
 }
-
-/*.track:hover {
-  background-color: #6B6C77;
-}*/
 
 .track-song-info {
   overflow: hidden;
@@ -79,13 +61,6 @@ body {
   width: 100%;
   padding-top: 2px;
   cursor: pointer;
-  /*margin-right: 50px;*/
-  /*display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  margin-right: 50px;*/
 }
 
 .track-song-artist {
@@ -105,6 +80,8 @@ body {
 }
 
 .heading {
+  display: flex;
+  flex-direction: column;
   padding-top: 20px;
   padding-bottom: 60px;
   text-align: center;
@@ -122,51 +99,6 @@ body {
   justify-content: space-around;
   width: 150px;
 }
-
-/*#player-controls-container {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}*/
-
-/*#player {
-  align-items: center;
-  background-color: #F2A374;
-  bottom: 0;
-  display: none;
-  flex-direction: row;
-  height: 44px;
-  justify-content: space-between;
-  max-width: 960px;
-  position: fixed;
-  width: 100%;
-}
-
-#player-img {
-  background-position: 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 40px;
-  margin-left: 2px;
-  width: 40px;
-}
-
-#player-song-info {
-  text-align: center;
-}
-
-#player-artist {
-  color: #FFF;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
-}
-
-#player-title {
-  color: #FBEAEA;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
-}*/
 
 #player {
   background-color: #F2A374;
@@ -204,7 +136,6 @@ body {
   margin-left: 2px;
   margin-top: 2px;
   width: 40px;
-  /*float: left;*/
 }
 
 #player-title {
@@ -233,9 +164,27 @@ body {
   text-align: center;
 }
 
+#search-again {
+  border-radius: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.search-again {
+  font-size: 14px;
+  font-weight: 300;
+  height: 22px;
+  width: 300px;
+}
+
+#search-again-button {
+  background-color: #F2A374;
+  border: none;
+  color: #FFF;
+  font-family: 'Open Sans', sans-serif;
+  padding: 7px 6px 6px 6px;
+}
+
 #search-box {
-  /*border-width: 1px;*/
-  /*border: none;*/
   border-radius: 0;
   height: 46px;
   max-width: 75vw;
@@ -248,10 +197,6 @@ body {
 }
 
 #search-button {
-  /*background-color: #F78C2F;*/
-  /*background-color: #68E5FF;*/
-  /*background-color: #5ACBCA;*/
-  /*background-color: #FF83B5;*/
   background-color: #81D9DD;
   border-width: 0;
   color: white;
@@ -268,9 +213,6 @@ body {
 }
 
 #subtitle {
-  /*color: #E3746B;*/
-  /*color: #B5F2FF;*/
-  /*color: #5BD5E9;*/
   color: #FFFFFD;
   font-family: 'Open Sans', sans-serif;
   font-size: 15px;
@@ -279,7 +221,10 @@ body {
 }
 
 .heading-after-search {
+  align-items: center;
   background-color: #3C3E49;
+  flex-direction: row;
+  justify-content: space-around;
   padding: 0;
   position: fixed;
   top: 0;
@@ -292,42 +237,20 @@ body {
   margin-top: 50px;
 }
 
-.title-after-search {
-  font-size: 20px;
-  margin-top: 5px;
-}
-
 .track-playing {
   background-color: #6B6C77;
 }
-
-/*.fa-circle-playing {
-  color: #F2A374;
-}*/
 
 .fa-stop-circle {
   color: #F2A374;
 }
 
 /* Media Queries */
-@media screen and (max-width: 479px) {
-  /*.heading-after-search {
-    background-color: #3C3E49;
-    padding: 0;
-    position: fixed;
-    top: 0;
-    height: 50px;
-  }
-
-  .search-after-search {
-    font-size: 14px;
-    color: #F7F7F7;
-    margin-top: 50px;
-  }
-
+@media screen and (max-width: 767px) {
   .title-after-search {
     font-size: 20px;
-  }*/
+    margin-top: 5px;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -347,7 +270,6 @@ body {
 
   .title-after-search {
     font-size: 40px;
-    margin-top: 10px;
   }
 
   .track:hover {
