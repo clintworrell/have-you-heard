@@ -10,6 +10,8 @@ $("#search-button").click(function() {
   artistName ? getSeedArtistId(artistName) : console.log("Please enter a band name");
 });
 
+
+
 function changeStylesAfterSearch() {
   $("#heading").addClass("heading-after-search");
   $("#title").addClass("title-after-search");
@@ -17,10 +19,23 @@ function changeStylesAfterSearch() {
   $("#search-again-container").append($("<input id='search-again' placeholder='Search again...' type='text'>"));
   $("#search-again").addClass("search-again");
   $("#search-again-container").append($("<button id='search-again-button' type='button'>Search</button>"));
+  $("#search-again-button").click(function() {
+    var artistName = $("#search-again").val();
+    artistName ? getSeedArtistId(artistName) : console.log("Please enter a band name");
+    searchAgain();
+    $("#search-again").val('');
+  });
   $("#subtitle").remove();
   $("#search").children().remove();
   $("#search").addClass("search-after-search");
   $("#tracks").addClass("tracks-after-search");
+}
+
+function searchAgain() {
+  audio.pause();
+  $("#player").css("display", "none");
+  $("#tracks").children().remove();
+  $('html,body').scrollTop(0);
 }
 
 function getSeedArtistId(artistName) {
