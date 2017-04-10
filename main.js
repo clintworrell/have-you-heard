@@ -15,15 +15,30 @@ $("#search-button").click(function() {
 function changeStylesAfterSearch() {
   $("#heading").addClass("heading-after-search");
   $("#title").addClass("title-after-search");
-  $("#heading").append($("<div id='search-again-container'></div>"));
-  $("#search-again-container").append($("<input id='search-again' placeholder='Search again...' type='text'>"));
-  $("#search-again").addClass("search-again");
-  $("#search-again-container").append($("<button id='search-again-button' type='button'>Search</button>"));
+  $("#heading").append($("<div id='search-again-container' class='search-again-container'></div>"));
+  $("#search-again-container").append($("<input id='search-again' class='search-again' placeholder='Search again...' type='text'>"));
+  $("#search-again-container").append($("<button id='search-again-button' class='search-again-button' type='button'>Search</button>"));
   $("#search-again-button").click(function() {
     var artistName = $("#search-again").val();
     artistName ? getSeedArtistId(artistName) : console.log("Please enter a band name");
     searchAgain();
     $("#search-again").val('');
+  });
+  $("#search-again-container").append($("<i id='search-again-icon' class='search-again-icon fa fa-search'></i>"));
+  $("#heading").after($("<div id='mobile-search-again-container' class='mobile-search-again-container-hidden'></div>"));
+  $("#mobile-search-again-container").append($("<input id='mobile-search-again' class='mobile-search-again' placeholder='Search again...' type='text'>"));
+  $("#mobile-search-again-container").append($("<button id='mobile-search-again-button' class='mobile-search-again-button' type='button'>Search</button>"));
+  $("#search-again-icon").click(function() {
+    $("#mobile-search-again-container").toggleClass("mobile-search-again-container-visible");
+    $("#mobile-search-again").val('');
+  });
+  $("#mobile-search-again-button").click(function() {
+    var artistName = $("#mobile-search-again").val();
+    $("#mobile-search-again-container").removeClass("mobile-search-again-container-visible");
+    $("#mobile-search-again-container").addClass("mobile-search-again-container-hidden");
+    artistName ? getSeedArtistId(artistName) : console.log("Please enter a band name");
+    searchAgain();
+    $("#mobile-search-again").val('');
   });
   $("#subtitle").remove();
   $("#search").children().remove();
