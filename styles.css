@@ -95,7 +95,7 @@ body {
   color: #FFF;
   align-items: center;
   display: flex;
-  font-size: 14px;
+  font-size: 20px;
   flex-direction: row;
   justify-content: space-around;
   width: 150px;
@@ -107,6 +107,7 @@ body {
   bottom: 0;
   display: none;
   height: 44px;
+  justify-content: space-between;
   position: fixed;
   width: 100%;
   max-width: 960px;
