@@ -2,7 +2,7 @@ const API_BASE_URL = 'https://api.spotify.com';
 const API_VERSION = 'v1';
 var audio;
 var autoplay = true;  // Default to autoplay on
-var stoppedTrack;
+var currentTrack;
 
 $("#search-button").click(function() {
   var artistName = $("#search-box").val();
@@ -144,12 +144,13 @@ function getArtistTopTracks(artistData) {
 }
 
 function stopPlayback() {
-  stoppedTrack = $(".track-playing");
+  currentTrack = $(".track-playing");
   audio.pause();
   trackEndedStyles();
 }
 
 function startPlayback(track) {
+  currentTrack = track;
   audio = new Audio(track.trackPreviewUrl);
   audio.play();
   audio.addEventListener("ended", function() {
@@ -173,16 +174,21 @@ function autoplayNextTrack(track) {
 }
 
 function goToNextTrack() {
-  stopPlayback();
-  var nextTrack = $(stoppedTrack).next(".track")[0]
-
-  // Go back to beginning if at end of tracks
+  var nextTrack = $(currentTrack).next(".track")[0]
   if(!nextTrack) {
     nextTrack = $(".track").first()[0];
     $('html,body').scrollTop(0);
   };
 
-  startPlayback(nextTrack);
+  if(audio.paused === false) {
+    stopPlayback();
+    startPlayback(nextTrack);
+  } else {
+    currentTrack = nextTrack;  // When 'play' clicked, currentTrack will be played
+    $("#player-title").text(`${currentTrack.trackName}`);
+    $("#player-artist").text(`${currentTrack.artistName}`);
+    $("#player-img").css("background-image", `url(${currentTrack.artistImageUrl})`);
+  };
 }
 
 function trackStartedStyles(track) {
