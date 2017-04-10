@@ -15,6 +15,10 @@ $("#player-controls-next").click(function() {
   goToNextTrack();
 });
 
+$("#player-controls-previous").click(function() {
+  goToPreviousTrack();
+});
+
 function changeStylesAfterSearch() {
   $("#heading").addClass("heading-after-search");
   $("#title").addClass("title-after-search");
@@ -174,10 +178,9 @@ function autoplayNextTrack(track) {
 }
 
 function goToNextTrack() {
-  var nextTrack = $(currentTrack).next(".track")[0]
+  var nextTrack = $(currentTrack).next(".track")[0];
   if(!nextTrack) {
     nextTrack = $(".track").first()[0];
-    $('html,body').scrollTop(0);
   };
 
   if(audio.paused === false) {
@@ -189,6 +192,23 @@ function goToNextTrack() {
     $("#player-artist").text(`${currentTrack.artistName}`);
     $("#player-img").css("background-image", `url(${currentTrack.artistImageUrl})`);
   };
+}
+
+function goToPreviousTrack() {
+  if(audio.paused === false) {
+    stopPlayback();
+    setTimeout(function() {
+      startPlayback(currentTrack[0]);
+    }, 1000);
+  } else {
+    currentTrack = $(currentTrack).prev(".track");
+    if(!currentTrack[0]) {
+      currentTrack = $(".track").last();
+    }
+    $("#player-title").text(`${currentTrack[0].trackName}`);
+    $("#player-artist").text(`${currentTrack[0].artistName}`);
+    $("#player-img").css("background-image", `url(${currentTrack[0].artistImageUrl})`);
+  }
 }
 
 function trackStartedStyles(track) {
