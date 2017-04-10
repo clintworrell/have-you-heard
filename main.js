@@ -2,6 +2,7 @@ const API_BASE_URL = 'https://api.spotify.com';
 const API_VERSION = 'v1';
 var audio;
 var autoplay = true;  // Default to autoplay on
+var stoppedTrack;
 
 $("#search-button").click(function() {
   var artistName = $("#search-box").val();
@@ -10,7 +11,9 @@ $("#search-button").click(function() {
   artistName ? getSeedArtistId(artistName) : console.log("Please enter a band name");
 });
 
-
+$("#player-controls-next").click(function() {
+  goToNextTrack();
+});
 
 function changeStylesAfterSearch() {
   $("#heading").addClass("heading-after-search");
@@ -141,6 +144,7 @@ function getArtistTopTracks(artistData) {
 }
 
 function stopPlayback() {
+  stoppedTrack = $(".track-playing");
   audio.pause();
   trackEndedStyles();
 }
@@ -150,12 +154,12 @@ function startPlayback(track) {
   audio.play();
   audio.addEventListener("ended", function() {
     trackEndedStyles();
-    if(autoplay) { playNextTrack(track); }
+    if(autoplay) { autoplayNextTrack(track); }
   });
   trackStartedStyles(track);
 }
 
-function playNextTrack(track) {
+function autoplayNextTrack(track) {
   var nextTrack = $(track).next(".track")[0];
   $(nextTrack).addClass("track-playing");
   $(nextTrack).children("i").removeClass("fa-play-circle");
@@ -164,6 +168,19 @@ function playNextTrack(track) {
   $("#player-title").text(`${nextTrack.trackName}`);
   $("#player-artist").text(`${nextTrack.artistName}`);
   $("#player-img").css("background-image", `url(${nextTrack.artistImageUrl})`);
+
+  startPlayback(nextTrack);
+}
+
+function goToNextTrack() {
+  stopPlayback();
+  var nextTrack = $(stoppedTrack).next(".track")[0]
+
+  // Go back to beginning if at end of tracks
+  if(!nextTrack) {
+    nextTrack = $(".track").first()[0];
+    $('html,body').scrollTop(0);
+  };
 
   startPlayback(nextTrack);
 }

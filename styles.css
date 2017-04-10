@@ -131,6 +131,10 @@ body {
   text-overflow: ellipsis;
 }
 
+#player-controls-previous, #player-controls-play-stop, #player-controls-next {
+  cursor: pointer;
+}
+
 #player-img {
   background-position: 50%;
   background-repeat: no-repeat;
