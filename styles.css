@@ -45,6 +45,7 @@ body {
   border-width: 1px 0 0 0;
   border-color: #353535;
   color: #F7F7F7;
+  cursor: pointer;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   overflow: hidden;
@@ -55,12 +56,12 @@ body {
 }
 
 .track-song-info {
+  margin-right: 11px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   width: 100%;
   padding-top: 2px;
-  cursor: pointer;
 }
 
 .track-song-artist {
