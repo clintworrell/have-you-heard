@@ -19,6 +19,14 @@ $("#player-controls-previous").click(function() {
   goToPreviousTrack();
 });
 
+$("#player-controls-play-stop").click(function() {
+  if(audio.paused === false) {
+    stopPlayback();
+  } else {
+    startPlayback(currentTrack);
+  }
+});
+
 function changeStylesAfterSearch() {
   $("#heading").addClass("heading-after-search");
   $("#title").addClass("title-after-search");
@@ -217,6 +225,8 @@ function trackStartedStyles(track) {
   $("#player-title").text(`${track.data("trackName")}`);
   $("#player-artist").text(`${track.data("artistName")}`);
   $("#player-img").css("background-image", `url(${track.data("artistImageUrl")})`);
+  $("#player-controls-play-stop").removeClass("fa-play");
+  $("#player-controls-play-stop").addClass("fa-stop");
 }
 
 function trackEndedStyles() {
@@ -226,4 +236,7 @@ function trackEndedStyles() {
   track.removeClass("track-playing");
   trackControls.removeClass("fa-stop-circle");
   trackControls.addClass("fa-play-circle");
+
+  $("#player-controls-play-stop").removeClass("fa-stop");
+  $("#player-controls-play-stop").addClass("fa-play");
 }
