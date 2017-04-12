@@ -174,13 +174,16 @@ body {
 
 #search-again {
   border-radius: 0;
+  border: none;
   font-family: 'Open Sans', sans-serif;
+  padding: 0 0 0 5px;
+  vertical-align: bottom;
 }
 
 .search-again {
   font-size: 14px;
   font-weight: 300;
-  height: 22px;
+  height: 28px;
   width: 300px;
 }
 
@@ -189,14 +192,18 @@ body {
   border: none;
   color: #FFF;
   font-family: 'Open Sans', sans-serif;
-  padding: 7px 6px 6px 6px;
+  height: 28px;
+  margin: 0;
+  padding: 0 10px;
+  vertical-align: bottom;
 }
 
 #search-box {
+  border: none;
   border-radius: 0;
   height: 46px;
   max-width: 75vw;
-  padding: 0 5px;
+  padding: 0 0 0 5px;
   width: 400px;
   font-size: 15px;
   font-family: 'Open Sans', sans-serif;
@@ -206,11 +213,12 @@ body {
 
 #search-button {
   background-color: #81D9DD;
-  border-width: 0;
+  border: none;
   color: white;
   font-family: 'Open Sans', sans-serif;
-  height: 50px;
+  height: 46px;
   margin: 0;
+  padding: 0 10px;
   vertical-align: bottom;
   width: 55px;
 }
