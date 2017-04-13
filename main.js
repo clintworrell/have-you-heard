@@ -11,6 +11,15 @@ $("#search-button").click(function() {
   artistName ? getSeedArtistId(artistName) : console.log("Please enter a band name");
 });
 
+$("#search").keypress(function(event) {
+  if(event.which === 13) {
+    var artistName = $("#search-box").val();
+
+    changeStylesAfterSearch();
+    artistName ? getSeedArtistId(artistName) : console.log("Please enter a band name");
+  }
+});
+
 $("#player-controls-next").click(function() {
   goToNextTrack();
 });
@@ -39,6 +48,14 @@ function changeStylesAfterSearch() {
     searchAgain();
     $("#search-again").val('');
   });
+  $("#search-again").keypress(function(event) {
+    if(event.which === 13) {
+      var artistName = $("#search-again").val();
+      artistName ? getSeedArtistId(artistName) : console.log("Please enter a band name");
+      searchAgain();
+      $("#search-again").val('');
+    }
+  });
   $("#search-again-container").append($("<i id='search-again-icon' class='search-again-icon fa fa-search'></i>"));
   $("#heading").after($("<div id='mobile-search-again-container' class='mobile-search-again-container-hidden'></div>"));
   $("#mobile-search-again-container").append($("<input id='mobile-search-again' class='mobile-search-again' placeholder='Search again...' type='text'>"));
@@ -54,6 +71,16 @@ function changeStylesAfterSearch() {
     artistName ? getSeedArtistId(artistName) : console.log("Please enter a band name");
     searchAgain();
     $("#mobile-search-again").val('');
+  });
+  $("#mobile-search-again").keypress(function(event) {
+    if(event.which === 13) {
+      var artistName = $("#mobile-search-again").val();
+      $("#mobile-search-again-container").removeClass("mobile-search-again-container-visible");
+      $("#mobile-search-again-container").addClass("mobile-search-again-container-hidden");
+      artistName ? getSeedArtistId(artistName) : console.log("Please enter a band name");
+      searchAgain();
+      $("#mobile-search-again").val('');
+    }
   });
   $("#subtitle").remove();
   $("#search").children().remove();
