@@ -349,9 +349,9 @@ body {
     font-size: 40px;
   }
 
-  .track:hover {
+  /*.track:hover {
     background-color: #6B6C77;
-  }
+  }*/
 
   #player-controls {
     font-size: 20px;
