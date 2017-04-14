@@ -206,19 +206,6 @@ function startPlayback(track) {
   });
 }
 
-// function autoplayNextTrack(track) {
-//   var nextTrack = $(track).next(".track");
-//   $(nextTrack).addClass("track-playing");
-//   $(nextTrack).children("i").removeClass("fa-play-circle");
-//   $(nextTrack).children("i").addClass("fa-stop-circle");
-//
-//   $("#player-title").text(`${nextTrack.trackName}`);
-//   $("#player-artist").text(`${nextTrack.artistName}`);
-//   $("#player-img").css("background-image", `url(${nextTrack.artistImageUrl})`);
-//
-//   startPlayback(nextTrack);
-// }
-
 function goToNextTrack() {
   var nextTrack = $(currentTrack).next(".track");
   if(!nextTrack.data()) {
