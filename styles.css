@@ -349,10 +349,6 @@ body {
     font-size: 40px;
   }
 
-  /*.track:hover {
-    background-color: #6B6C77;
-  }*/
-
   #player-controls {
     font-size: 20px;
     width: 200px;
@@ -365,5 +361,11 @@ body {
 
   #player-song-info {
     font-size: 16px;
+  }
+}
+
+@media (hover:hover) {
+  .track:hover {
+    background-color: #6B6C77;
   }
 }
