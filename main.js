@@ -189,9 +189,11 @@ function startPlayback(track) {
   currentTrack = track;
   audio = new Audio(track.data("trackPreviewUrl"));
   var audioPromise = audio.play();
-  if(audioPromise !== undefined) {
+  if(audioPromise === undefined) {
+    trackStartedStyles(track);
+  }
+  else {
     audioPromise.then(function() {
-      // Playback started
       trackStartedStyles(track);
     }).catch(function(error) {
       console.log("User agent or platform doesn't support autoplay. Manually play additional tracks");
