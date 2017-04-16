@@ -254,6 +254,7 @@ function trackStartedStyles(track) {
   $("#player-img").css("background-image", `url(${track.data("artistImageUrl")})`);
   $("#player-controls-play-stop").removeClass("fa-play");
   $("#player-controls-play-stop").addClass("fa-stop");
+  $(".track").last().css("padding-bottom", "44px");
 }
 
 function trackEndedStyles() {

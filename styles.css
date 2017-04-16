@@ -349,6 +349,10 @@ body {
     font-size: 40px;
   }
 
+  #mobile-search-again-container {
+    display: none;
+  }
+
   #player-controls {
     font-size: 20px;
     width: 200px;
